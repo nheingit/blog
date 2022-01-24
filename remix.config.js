@@ -7,5 +7,13 @@ module.exports = {
   publicPath: "/build/",
   serverBuildDirectory: "netlify/functions/server/build",
   devServerPort: 8002,
-  ignoredRouteFiles: [".*"]
+  ignoredRouteFiles: [".*"],
+  mdx: async filename => {
+    const [rehypeHightlight] =  await Promise.all([
+      import("rehype-highlight").then(mod => mod.default)
+    ]);
+    return {
+      rehypePlugins: [rehypeHightlight]
+    }
+  }
 };
