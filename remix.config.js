@@ -8,12 +8,12 @@ module.exports = {
   serverBuildDirectory: "netlify/functions/server/build",
   devServerPort: 8002,
   ignoredRouteFiles: [".*"],
-  mdx: async filename => {
-    const [rehypeHightlight] =  await Promise.all([
-      import("rehype-highlight").then(mod => mod.default)
+  mdx: async (filename) => {
+    const [rehypeHightlight] = await Promise.all([
+      import("rehype-highlight").then((mod) => mod.default),
     ]);
     return {
-      rehypePlugins: [rehypeHightlight]
-    }
-  }
+      rehypePlugins: [rehypeHightlight],
+    };
+  },
 };
