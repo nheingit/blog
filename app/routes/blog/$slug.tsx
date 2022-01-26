@@ -2,7 +2,6 @@ import { LoaderFunction, useLoaderData } from "remix";
 import invariant from "tiny-invariant";
 import { getMDXComponent } from "mdx-bundler/client";
 import * as React from "react";
-import fs from "fs";
 import path from "path";
 import { compileMdx } from "~/utils/compile-mdx.server";
 
