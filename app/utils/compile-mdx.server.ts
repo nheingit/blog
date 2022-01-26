@@ -1,5 +1,6 @@
 import { bundleMDX } from "mdx-bundler";
 type GitHubFile = { path: string };
+import path from "path";
 import fs from "fs";
 
 function arrayToObj<ItemType extends Record<string, unknown>>(
@@ -25,6 +26,22 @@ async function compileMdx(slug: string, githubFiles: Array<GitHubFile>) {
   const rootDir = indexFile.path.replace(/index.mdx?$/, "");
   const source = fs.readFileSync(indexFile.path, "utf8");
   try {
+    if (process.platform === "win32") {
+      process.env.ESBUILD_BINARY_PATH = path.join(
+        process.cwd(),
+        "node_modules",
+        "esbuild",
+        "esbuild.exe"
+      );
+    } else {
+      process.env.ESBUILD_BINARY_PATH = path.join(
+        process.cwd(),
+        "node_modules",
+        "esbuild",
+        "bin",
+        "esbuild"
+      );
+    }
     const { frontmatter, code } = await bundleMDX({
       source,
       cwd: rootDir,
