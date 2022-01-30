@@ -3,22 +3,6 @@ type GitHubFile = { path: string };
 import path from "path";
 import fs from "fs";
 
-function arrayToObj<ItemType extends Record<string, unknown>>(
-  array: Array<ItemType>,
-  { keyName, valueName }: { keyName: keyof ItemType; valueName: keyof ItemType }
-) {
-  const obj: Record<string, ItemType[keyof ItemType]> = {};
-  for (const item of array) {
-    const key = item[keyName];
-    if (typeof key !== "string") {
-      throw new Error(`${keyName} of item must be a string`);
-    }
-    const value = item[valueName];
-    obj[key] = value;
-  }
-  return obj;
-}
-
 async function compileMdx(slug: string, githubFiles: Array<GitHubFile>) {
   const indexRegex = new RegExp(`${slug}\\/index.mdx?$`);
   const indexFile = githubFiles.find(({ path }) => indexRegex.test(path));
@@ -54,3 +38,4 @@ async function compileMdx(slug: string, githubFiles: Array<GitHubFile>) {
 }
 
 export { compileMdx };
+export { bundleMDX } from "mdx-bundler";

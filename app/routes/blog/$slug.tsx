@@ -2,9 +2,22 @@ import { LoaderFunction, useLoaderData } from "remix";
 import invariant from "tiny-invariant";
 import { getMDXComponent } from "mdx-bundler/client";
 import * as React from "react";
-import path from "path";
-import { compileMdx } from "~/utils/compile-mdx.server";
+import { path, fs } from "~/utils/path.server";
+import { bundleMDX } from "~/utils/compile-mdx.server";
 
+// export const loader: LoaderFunction = async ({ params }) => {
+// invariant(params.slug, "expected params.slug");
+// const PathToMDX = path.join(
+// process.cwd(),
+// "posts",
+// `${params.slug}`,
+// "index.mdx"
+// );
+// const post = await compileMdx(params.slug, [{ path: PathToMDX }]);
+// if (!post) return null;
+
+// return post;
+// }
 export const loader: LoaderFunction = async ({ params }) => {
   invariant(params.slug, "expected params.slug");
   const PathToMDX = path.join(
@@ -13,9 +26,15 @@ export const loader: LoaderFunction = async ({ params }) => {
     `${params.slug}`,
     "index.mdx"
   );
-  const post = await compileMdx(params.slug, [{ path: PathToMDX }]);
-  if (!post) return null;
-  return post;
+  console.log(PathToMDX);
+  const rootDir = PathToMDX.replace(/index.mdx?$/, "");
+  const result = await bundleMDX({
+    source: fs.readFileSync(PathToMDX, "utf8"),
+    cwd: rootDir,
+  });
+  if (!result) return null;
+  const { code, frontmatter } = result;
+  return { code, frontmatter };
 };
 
 export default function PostSlug() {

@@ -12,7 +12,7 @@ import { Navbar } from "./components/navbar";
 import styles from "./tailwind.css";
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return { title: "Noah's blog" };
 };
 
 export const links: LinksFunction = () => {
