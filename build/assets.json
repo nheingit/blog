@@ -1,0 +1,83 @@
+{
+  "version": "00d4b61c",
+  "entry": {
+    "module": "/build/entry.client-7PGMGIUY.js",
+    "imports": [
+      "/build/_shared/chunk-DGNGNE3C.js",
+      "/build/_shared/chunk-N2RB76FW.js",
+      "/build/_shared/chunk-AKSB5QXU.js"
+    ]
+  },
+  "routes": {
+    "root": {
+      "id": "root",
+      "path": "",
+      "module": "/build/root-VBHISQMP.js",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasCatchBoundary": false,
+      "hasErrorBoundary": false
+    },
+    "routes/blog": {
+      "id": "routes/blog",
+      "parentId": "root",
+      "path": "blog",
+      "module": "/build/routes/blog-YMME6YLV.js",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasCatchBoundary": false,
+      "hasErrorBoundary": false
+    },
+    "routes/blog/$slug": {
+      "id": "routes/blog/$slug",
+      "parentId": "routes/blog",
+      "path": ":slug",
+      "module": "/build/routes/blog/$slug-5XWS3CAW.js",
+      "hasAction": false,
+      "hasLoader": true,
+      "hasCatchBoundary": false,
+      "hasErrorBoundary": false
+    },
+    "routes/blog/first-post": {
+      "id": "routes/blog/first-post",
+      "parentId": "routes/blog",
+      "path": "first-post",
+      "module": "/build/routes/blog/first-post-Z5IHFINL.js",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasCatchBoundary": false,
+      "hasErrorBoundary": false
+    },
+    "routes/blog/index": {
+      "id": "routes/blog/index",
+      "parentId": "routes/blog",
+      "index": true,
+      "module": "/build/routes/blog/index-QBMQMWLF.js",
+      "hasAction": false,
+      "hasLoader": true,
+      "hasCatchBoundary": false,
+      "hasErrorBoundary": false
+    },
+    "routes/blog/putting-yourself-out-there": {
+      "id": "routes/blog/putting-yourself-out-there",
+      "parentId": "routes/blog",
+      "path": "putting-yourself-out-there",
+      "module": "/build/routes/blog/putting-yourself-out-there-Y2S22J5M.js",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasCatchBoundary": false,
+      "hasErrorBoundary": false
+    },
+    "routes/index": {
+      "id": "routes/index",
+      "parentId": "root",
+      "index": true,
+      "module": "/build/routes/index-NCIYAO4E.js",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasCatchBoundary": false,
+      "hasErrorBoundary": false
+    }
+  },
+  "url": "/build/manifest-00D4B61C.js"
+}
