@@ -1,5 +1,5 @@
 {
-  "version": "d5409733",
+  "version": "96c0164c",
   "entry": {
     "module": "/build/entry.client-DTVK453X.js",
     "imports": [
@@ -22,7 +22,7 @@
       "id": "routes/blog",
       "parentId": "root",
       "path": "blog",
-      "module": "/build/routes/blog-J5IV7FKI.js",
+      "module": "/build/routes/blog-DS4QTOS2.js",
       "hasAction": false,
       "hasLoader": false,
       "hasCatchBoundary": false,
@@ -32,17 +32,23 @@
       "id": "routes/blog/$slug",
       "parentId": "routes/blog",
       "path": ":slug",
-      "module": "/build/routes/blog/$slug-ELUFXAID.js",
+      "module": "/build/routes/blog/$slug-HK2XVK6H.js",
+      "imports": [
+        "/build/_shared/chunk-K7KUS2AB.js"
+      ],
       "hasAction": false,
       "hasLoader": true,
       "hasCatchBoundary": false,
-      "hasErrorBoundary": false
+      "hasErrorBoundary": true
     },
     "routes/blog/index": {
       "id": "routes/blog/index",
       "parentId": "routes/blog",
       "index": true,
-      "module": "/build/routes/blog/index-7KJ3CX7V.js",
+      "module": "/build/routes/blog/index-NWDENZAG.js",
+      "imports": [
+        "/build/_shared/chunk-K7KUS2AB.js"
+      ],
       "hasAction": false,
       "hasLoader": true,
       "hasCatchBoundary": false,
@@ -59,5 +65,5 @@
       "hasErrorBoundary": false
     }
   },
-  "url": "/build/manifest-D5409733.js"
+  "url": "/build/manifest-96C0164C.js"
 }

@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData } from "remix";
+import { Links, LoaderFunction, Meta, Scripts, useLoaderData } from "remix";
 import invariant from "tiny-invariant";
 import { getMDXComponent } from "mdx-bundler/client";
 import * as React from "react";
@@ -26,15 +26,18 @@ export const loader: LoaderFunction = async ({ params }) => {
     `${params.slug}`,
     "index.mdx"
   );
-  console.log(PathToMDX);
   const rootDir = PathToMDX.replace(/index.mdx?$/, "");
-  const result = await bundleMDX({
-    source: fs.readFileSync(PathToMDX, "utf8"),
-    cwd: rootDir,
-  });
-  if (!result) return null;
-  const { code, frontmatter } = result;
-  return { code, frontmatter };
+  try {
+    const result = await bundleMDX({
+      source: fs.readFileSync(PathToMDX, "utf8"),
+      cwd: rootDir,
+    });
+    if (!result) return null;
+    const { code, frontmatter } = result;
+    return { code, frontmatter };
+  } catch (error) {
+    throw new Error(`Didn't find any blog post at blog/${params.slug}`);
+  }
 };
 
 export default function PostSlug() {
@@ -50,5 +53,27 @@ export default function PostSlug() {
         <Component />
       </main>
     </div>
+  );
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  console.error(error);
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <h1>Whoops! Looks like you found an error. Sorry about that :(</h1>
+        <div className="flex flex-row">
+          <p>
+            <strong>Error message:</strong> {error.message}
+          </p>
+        </div>
+        <Scripts />
+      </body>
+    </html>
   );
 }

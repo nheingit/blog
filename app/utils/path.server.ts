@@ -1,2 +1,3 @@
 const path = require("path");
-export default path;
+const fs = require("fs");
+export { path, fs };

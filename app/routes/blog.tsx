@@ -1,5 +1,5 @@
 import stlyes from "highlight.js/styles/github-dark-dimmed.css";
-import { LinksFunction, Outlet } from "remix";
+import { LinksFunction, Outlet, Meta, Links, Scripts } from "remix";
 
 export const links: LinksFunction = () => {
   return [

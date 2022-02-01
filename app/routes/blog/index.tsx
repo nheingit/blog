@@ -1,14 +1,61 @@
-import { LoaderFunction, useLoaderData } from "remix";
+import {
+  LoaderFunction,
+  useLoaderData,
+  Meta,
+  Scripts,
+  Links,
+  Link,
+} from "remix";
+import { path, fs } from "~/utils/path.server";
+import { bundleMDX } from "~/utils/compile-mdx.server";
+type Frontmatter = {
+  title: string;
+  published: Date;
+  description: string;
+  slug: string;
+};
+
+const getDirectories = (source: any) =>
+  fs
+    .readdirSync(source, { withFileTypes: true })
+    .filter((dirent: any) => dirent.isDirectory())
+    .map((dirent: any) => dirent.name);
 
 export const loader: LoaderFunction = async () => {
-  return 2;
+  const PathToPosts = path.join(process.cwd(), "posts");
+  const postDirs = await getDirectories(PathToPosts);
+  // postDirs == [ 'double-test', 'test-mdx' ]
+  const postFrontmatter: Array<{}> = postDirs.map(async (postTitle: string) => {
+    const PathToMDX = path.join(
+      process.cwd(),
+      "posts",
+      `${postTitle}`,
+      "index.mdx"
+    );
+    const rootDir = PathToMDX.replace(/index.mdx?$/, "");
+    const result = await bundleMDX({
+      source: fs.readFileSync(PathToMDX, "utf8"),
+      cwd: rootDir,
+    });
+    if (!result) return null;
+    return { ...result.frontmatter, slug: postTitle };
+  });
+  return Promise.all(postFrontmatter);
 };
+
 export default function BlogIndex() {
-  const loader = useLoaderData();
+  const posts = useLoaderData<Frontmatter[]>();
+  console.log(posts);
   return (
     <div>
       <h2>Posts</h2>
-      <p>{loader}</p>
+      <ul>
+        {posts.map((post: Frontmatter) => (
+          <li key={post.slug}>
+            <Link to={post.slug}>{post.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
