@@ -2,6 +2,10 @@ import { bundleMDX } from "mdx-bundler";
 type GitHubFile = { path: string };
 import path from "path";
 import fs from "fs";
+import rehypeSlug from 'rehype-slug';
+import rehypeCodeTitles from 'rehype-code-titles';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeHighlight from "rehype-highlight";
 
 async function compileMdx(slug: string, githubFiles: Array<GitHubFile>) {
   const indexRegex = new RegExp(`${slug}\\/index.mdx?$`);
@@ -29,6 +33,23 @@ async function compileMdx(slug: string, githubFiles: Array<GitHubFile>) {
     const { frontmatter, code } = await bundleMDX({
       source,
       cwd: rootDir,
+      xdmOptions(options) {
+        options.rehypePlugins = [
+          ...(options?.rehypePlugins ?? []),
+          rehypeHighlight,
+          rehypeSlug,
+          rehypeCodeTitles,
+          [
+            rehypeAutolinkHeadings,
+            {
+              properties: {
+                className: ['anchor']
+              }
+            }
+          ]
+        ];
+        return options;
+      },
     });
     return { code, frontmatter };
   } catch (error: unknown) {
@@ -38,4 +59,4 @@ async function compileMdx(slug: string, githubFiles: Array<GitHubFile>) {
 }
 
 export { compileMdx };
-export { bundleMDX } from "mdx-bundler";
+export { bundleMDX } from "mdx-bundler"

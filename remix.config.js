@@ -7,5 +7,15 @@ module.exports = {
   publicPath: "/build/",
   serverBuildDirectory: "build",
   devServerPort: 8002,
-  ignoredRouteFiles: [".*"]
+  ignoredRouteFiles: [".*"],
+  serverDependenciesToBundle: [
+    "rehype-highlight",
+    "rehype-slug",
+    "rehype-code-titles",
+    "rehype-autolink-headings",
+    /hast/,
+    'lowlight',
+    "fault",
+    /util/,
+  ],
 };

@@ -1,7 +1,7 @@
 {
-  "version": "96c0164c",
+  "version": "989a7767",
   "entry": {
-    "module": "/build/entry.client-DTVK453X.js",
+    "module": "/build/entry.client-XEAJLWBL.js",
     "imports": [
       "/build/_shared/chunk-OQ4VQ54M.js",
       "/build/_shared/chunk-M3CTSPVS.js",
@@ -12,7 +12,7 @@
     "root": {
       "id": "root",
       "path": "",
-      "module": "/build/root-XMKF2FIQ.js",
+      "module": "/build/root-DMUGKAUO.js",
       "hasAction": false,
       "hasLoader": false,
       "hasCatchBoundary": false,
@@ -22,7 +22,7 @@
       "id": "routes/blog",
       "parentId": "root",
       "path": "blog",
-      "module": "/build/routes/blog-DS4QTOS2.js",
+      "module": "/build/routes/blog-QHFWU5ZG.js",
       "hasAction": false,
       "hasLoader": false,
       "hasCatchBoundary": false,
@@ -32,7 +32,7 @@
       "id": "routes/blog/$slug",
       "parentId": "routes/blog",
       "path": ":slug",
-      "module": "/build/routes/blog/$slug-HK2XVK6H.js",
+      "module": "/build/routes/blog/$slug-DIQXT6RV.js",
       "imports": [
         "/build/_shared/chunk-K7KUS2AB.js"
       ],
@@ -45,7 +45,7 @@
       "id": "routes/blog/index",
       "parentId": "routes/blog",
       "index": true,
-      "module": "/build/routes/blog/index-NWDENZAG.js",
+      "module": "/build/routes/blog/index-DQOGGJUI.js",
       "imports": [
         "/build/_shared/chunk-K7KUS2AB.js"
       ],
@@ -58,12 +58,12 @@
       "id": "routes/index",
       "parentId": "root",
       "index": true,
-      "module": "/build/routes/index-VW3OGDY2.js",
+      "module": "/build/routes/index-BUVHS4TY.js",
       "hasAction": false,
       "hasLoader": false,
       "hasCatchBoundary": false,
       "hasErrorBoundary": false
     }
   },
-  "url": "/build/manifest-96C0164C.js"
+  "url": "/build/manifest-989A7767.js"
 }
