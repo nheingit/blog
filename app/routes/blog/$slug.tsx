@@ -65,7 +65,6 @@ export default function PostSlug() {
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
-  console.error(error);
   return (
     <html>
       <head>
