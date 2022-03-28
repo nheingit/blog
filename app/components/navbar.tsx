@@ -2,80 +2,8 @@ import { Link } from 'remix';
 import React, { useRef, useState, useEffect } from 'react';
 import { InstantSearch, useSearchBox, UseSearchBoxProps } from 'react-instantsearch-hooks';
 
-import { Hits, Hit } from './Hit';
+import { Hits, Hit, SearchBox } from './Search';
 import algoliasearch from 'algoliasearch/lite';
-
-export type SearchBoxProps = UseSearchBoxProps;
-
-export function SearchBox(props: SearchBoxProps) {
-	const { query, refine, isSearchStalled } = useSearchBox(props);
-	const [ inputValue, setInputValue ] = useState(query);
-	const inputRef = useRef<HTMLInputElement>(null);
-
-	function handleSubmit(event: React.FormEvent) {
-		event.preventDefault();
-		event.stopPropagation();
-
-		if (inputRef.current) {
-			inputRef.current.blur();
-		}
-	}
-
-	function handleReset(event: React.FormEvent) {
-		event.preventDefault();
-		event.stopPropagation();
-
-		setInputValue('');
-
-		if (inputRef.current) {
-			inputRef.current.focus();
-		}
-	}
-
-	// Track when the value coming from the React state changes to synchronize
-	// it with InstantSearch.
-	useEffect(
-		() => {
-			if (query !== inputValue) {
-				refine(inputValue);
-			}
-		},
-		[ inputValue, refine ]
-	);
-
-	// Track when the InstantSearch query changes to synchronize it with
-	// the React state.
-	useEffect(
-		() => {
-			// Bypass the state update if the input is focused to avoid concurrent
-			// updates when typing.
-			if (document.activeElement !== inputRef.current && query !== inputValue) {
-				setInputValue(query);
-			}
-		},
-		[ query ]
-	);
-
-	return (
-		<div className="ais-SearchBox">
-			<form action="" className="ais-SearchBox-form" noValidate onSubmit={handleSubmit} onReset={handleReset}>
-				<input
-					ref={inputRef}
-					className="ais-SearchBox-input"
-					autoComplete="off"
-					autoCorrect="off"
-					autoCapitalize="off"
-					placeholder={'...search'}
-					spellCheck={false}
-					maxLength={512}
-					type="search"
-					value={inputValue}
-					onChange={(event) => setInputValue(event.currentTarget.value)}
-				/>
-			</form>
-		</div>
-	);
-}
 
 function Navbar() {
 	const searchClient = algoliasearch('GC617R2XGC', 'f7e9fa99847d55da0f06182f82281ba3');
@@ -106,12 +34,6 @@ function Navbar() {
 							</div>
 							<SearchBox />
 							<Hits hitComponent={Hit} />
-							<input
-								type="text"
-								id="email-adress-icon"
-								className="block w-full p-2 pl-10 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-								placeholder="Search..."
-							/>
 						</div>
 						<button
 							data-collapse-toggle="mobile-menu-3"
