@@ -1,4 +1,12 @@
-import { Links, LoaderFunction, Meta, Scripts, useLoaderData } from "remix";
+import {
+  Links,
+  LoaderFunction,
+  Meta,
+  MetaFunction,
+  Scripts,
+  useLoaderData,
+  useParams,
+} from "remix";
 import invariant from "tiny-invariant";
 import { getMDXComponent } from "mdx-bundler/client";
 import * as React from "react";
@@ -8,6 +16,10 @@ import rehypeSlug from "rehype-slug";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
+
+export const meta: MetaFunction = ({ data }) => {
+  return { title: data?.frontmatter?.title || "Probably a 404" };
+};
 
 export const loader: LoaderFunction = async ({ params }) => {
   invariant(params.slug, "expected params.slug");
