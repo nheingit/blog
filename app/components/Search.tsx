@@ -40,7 +40,7 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>(
 						text-gray-700
 						hover:bg-gray-200"
             >
-              <Link to={`blog/${hit.objectID}`}>
+              <Link to={`garden/${hit.objectID}`}>
                 <Hit hit={hit as unknown as THit} />
               </Link>
             </li>
