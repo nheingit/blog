@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs/promises'
+import syncFs from 'fs'
 import parseFrontMatter from "front-matter"
 import invariant from "tiny-invariant";
 import { marked } from "marked";
@@ -8,6 +9,7 @@ import { marked } from "marked";
 export type Post = {
   slug: string;
   title: string;
+  markdown?: string;
 };
 
 export type PostMarkdownAttributes = {
@@ -42,6 +44,13 @@ export async function getPosts() {
       };
     })
   )
+}
+
+export async function createPost(post: Post) {
+  if (!post.markdown) return 'no markdown in post, try again'
+  syncFs.mkdirSync(path.join(postsPath, post.slug));
+  const path_to_write = path.join(postsPath, post.slug, 'index.mdx')
+  fs.writeFile(path_to_write, post.markdown)
 }
 
 export async function getPost(slug: string) {

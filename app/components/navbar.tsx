@@ -2,8 +2,6 @@ import { Link } from "remix";
 import React, { useRef, useState, useEffect } from "react";
 import {
   InstantSearch,
-  useSearchBox,
-  UseSearchBoxProps,
 } from "react-instantsearch-hooks";
 
 import { Hits, Hit, SearchBox } from "./Search";
